@@ -17,12 +17,11 @@
       <ul
         class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
-          <a
-            class="block py-2 px-3 text-white bg-orange-500 rounded md:bg-transparent md:text-orange-500 md:p-0 dark:text-white md:dark:text-orange-400"
-            routerLink="/">Home</a>
+          <a class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
+            routerLink="/home" routerLinkActive="dark:text-orange-400">Home</a>
         </li>
         <li>
-          <a routerLink="/about"
+          <a routerLink="/about" routerLinkActive="dark:text-orange-400"
             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
         </li>
         <li>
@@ -37,34 +36,87 @@
           <a href="#" onclick="my_modal_3.showModal()"
             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log
             In</a>
-            <dialog id="my_modal_3" class="modal">
-              <div class="modal-box">
-                <form method="dialog">
-                  <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                </form><h3 class="font-bold text-lg">Inicia sesión o Regístrate</h3>
-                <hr class="my-2 bg-gray-900">
-                <form>
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text">Email</span>
-                    </label>
-                    <input type="text" placeholder="Email" class="input input-bordered" [formControl]="emailControl"/>
-                  </div>
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text">Contraseña</span>
-                    </label>
-                    <input type="text" placeholder="Contraseña" class="input input-bordered" [formControl]="passwordControl"/>
-                    <label class="label">
-                      <a href="#" class="label-text-alt link link-hover">¿Olvidaste tu contraseña?</a>
-                    </label>
-                  </div>
-                  <div class="form-control mt-6">
-                    <button class="btn bg-orange-500" (click)="login($event)">Login</button>
-                  </div>
-                </form>
-              </div>
-            </dialog>          
+          <dialog id="my_modal_3" class="modal">
+            <div class="modal-box">
+              <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              </form>
+              <h3 class="font-bold text-lg">Inicia sesión o Regístrate</h3>
+              <hr class="my-2 bg-gray-900">
+              <form>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Email</span>
+                  </label>
+                  <input type="text" placeholder="Email" class="input input-bordered" [formControl]="emailControl" />
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Contraseña</span>
+                  </label>
+                  <input type="password" placeholder="Contraseña" class="input input-bordered"
+                    [formControl]="passwordControl" />
+                  <label class="label">
+                    <a href="#" class="label-text-alt link link-hover">¿Olvidaste tu contraseña?</a>
+                  </label>
+                  <label class="label">
+                    <a href="#" class="label-text-alt link link-hover"onclick="my_modal_3.close(), my_modal.showModal()">¿No tienes cuenta?
+                      Registrate</a>
+                  </label>
+                  <!-- !Sign up -->
+                  <dialog id="my_modal" class="modal">
+                    <div class="modal-box">
+                      <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                      </form>
+                      <h3 class="font-bold text-lg">Regístrate</h3>
+                      <hr class="my-2 bg-gray-900">
+                      <form>
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Nombre</span>
+                          </label>
+                          <input type="text" placeholder="Nombre" class="input input-bordered" />
+                        </div>
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Apellidos</span>
+                          </label>
+                          <input type="text" placeholder="Apellidos" class="input input-bordered" />
+                        </div>
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Email</span>
+                          </label>
+                          <input type="text" placeholder="Email" class="input input-bordered"
+                            [formControl]="emailControl" />
+                        </div>
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Contraseña</span>
+                          </label>
+                          <input type="password" placeholder="Contraseña" class="input input-bordered"
+                            [formControl]="passwordControl" />
+                        </div>
+                        <div class="form-control">
+                          <label class="label">
+                            <span class="label-text">Confirmar contraseña</span>
+                          </label>
+                          <input type="password" placeholder="Confirmar contraseña" class="input input-bordered" />
+                        </div>
+                        <div class="form-control mt-6">
+                          <button class="btn bg-orange-500" (click)="login($event)">Sign up</button>
+                        </div>
+                      </form>
+                    </div>
+                  </dialog>
+                </div>
+                <div class="form-control mt-6">
+                  <button class="btn bg-orange-500" (click)="login($event)">Login</button>
+                </div>
+              </form>
+            </div>
+          </dialog>
         </li>
       </ul>
     </div>

@@ -14,9 +14,7 @@ export class PokeApiService {
     return this.http.get<any[]>(url.toString());
   }
 
-  getCharacterById(id: string){
-    let url = new URL(`https://hp-api.onrender.com/api/character/${id}`);
-
-    return this.http.get<any[]>(url.toString());
+  getPokemonByUrl(url: string){
+    return this.http.get<any>(url.toString());
   }
 }
