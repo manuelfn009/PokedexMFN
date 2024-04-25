@@ -76,13 +76,13 @@
                           <label class="label">
                             <span class="label-text">Nombre</span>
                           </label>
-                          <input type="text" placeholder="Nombre" class="input input-bordered" />
+                          <input type="text" placeholder="Nombre" class="input input-bordered" [formControl]="nameControl" />
                         </div>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Apellidos</span>
                           </label>
-                          <input type="text" placeholder="Apellidos" class="input input-bordered" />
+                          <input type="text" placeholder="Apellidos" class="input input-bordered" [formControl]="surnameControl" />
                         </div>
                         <div class="form-control">
                           <label class="label">
@@ -105,7 +105,7 @@
                           <input type="password" placeholder="Confirmar contraseña" class="input input-bordered" />
                         </div>
                         <div class="form-control mt-6">
-                          <button class="btn bg-orange-500" (click)="login($event)">Sign up</button>
+                          <button class="btn bg-orange-500" (click)="signup($event)">Sign up</button>
                         </div>
                       </form>
                     </div>

@@ -16,4 +16,8 @@ export class AuthService {
   logout() {
     return this.s_client.auth.signOut();
   }
+
+  signUp(email: string, password: string) {
+    return this.s_client.auth.signUp({ email: email, password: password });
+  }
 }
