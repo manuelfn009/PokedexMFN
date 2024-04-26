@@ -22,4 +22,17 @@ export class BbddService {
       .select()
       .then(response => response.data as []));
   }
+
+  getUserByEmail(email: string, password: string): Observable<[]> {
+    return from(this.supabase
+      .from('User')
+      .select('*')
+      .eq('email', email)
+      .eq('password', password)
+      .then(response => response.data as []));
+  }
+
+  signOut() {
+    this.supabase.auth.signOut();
+  }
 }

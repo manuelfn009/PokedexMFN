@@ -1,123 +1,247 @@
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+  >
     <a class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="../../assets/img/IconoPokemon.png" class="h-8" alt="Flowbite Logo" />
-      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">PokedexMFN</span>
+      <img
+        src="../../assets/img/IconoPokemon.png"
+        class="h-8"
+        alt="Flowbite Logo"
+      />
+      <span
+        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+        >PokedexMFN</span
+      >
     </a>
-    <button data-collapse-toggle="navbar-default" type="button"
+    <button
+      data-collapse-toggle="navbar-default"
+      type="button"
       class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      aria-controls="navbar-default" aria-expanded="false">
+      aria-controls="navbar-default"
+      aria-expanded="false"
+    >
       <span class="sr-only">Open main menu</span>
-      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M1 1h15M1 7h15M1 13h15" />
+      <svg
+        class="w-5 h-5"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 17 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1h15M1 7h15M1 13h15"
+        />
       </svg>
     </button>
     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
       <ul
-        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+      >
+        @if (user) {
         <li>
-          <a class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
-            routerLink="/home" routerLinkActive="dark:text-orange-400">Home</a>
+          <strong
+            ><h2
+              class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
+            >
+              Welcome {{ user?.name }}
+            </h2>
+          </strong>
+        </li>
+        }
+        <li>
+          <a
+            class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
+            routerLink="/home"
+            routerLinkActive="dark:text-orange-400"
+            >Home</a
+          >
+        </li>
+
+        <li>
+          <a
+            routerLink="/about"
+            routerLinkActive="dark:text-orange-400"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            >About</a
+          >
         </li>
         <li>
-          <a routerLink="/about" routerLinkActive="dark:text-orange-400"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+          <a
+            href="#"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            >Services</a
+          >
         </li>
         <li>
-          <a href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+          <a
+            href="#"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            >Pricing</a
+          >
         </li>
+        @if (user) {
         <li>
-          <a href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+          <a
+            href="#"
+            (click)="logout()"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            >Log out</a
+          >
         </li>
+        } @else {
+
         <li>
-          <a href="#" onclick="my_modal_3.showModal()"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log
-            In</a>
+          <a
+            href="#"
+            onclick="my_modal_3.showModal()"
+            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            >Log In</a
+          >
           <dialog id="my_modal_3" class="modal">
             <div class="modal-box">
               <form method="dialog">
-                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                <button
+                  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                >
+                  ✕
+                </button>
               </form>
               <h3 class="font-bold text-lg">Inicia sesión o Regístrate</h3>
-              <hr class="my-2 bg-gray-900">
+              <hr class="my-2 bg-gray-900" />
               <form>
                 <div class="form-control">
                   <label class="label">
                     <span class="label-text">Email</span>
                   </label>
-                  <input type="text" placeholder="Email" class="input input-bordered" [formControl]="emailControl" />
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    class="input input-bordered"
+                    [formControl]="emailControl"
+                  />
                 </div>
                 <div class="form-control">
                   <label class="label">
                     <span class="label-text">Contraseña</span>
                   </label>
-                  <input type="password" placeholder="Contraseña" class="input input-bordered"
-                    [formControl]="passwordControl" />
+                  <input
+                    type="password"
+                    placeholder="Contraseña"
+                    class="input input-bordered"
+                    [formControl]="passwordControl"
+                  />
                   <label class="label">
-                    <a href="#" class="label-text-alt link link-hover">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="label-text-alt link link-hover"
+                      >¿Olvidaste tu contraseña?</a
+                    >
                   </label>
                   <label class="label">
-                    <a href="#" class="label-text-alt link link-hover"onclick="my_modal_3.close(), my_modal.showModal()">¿No tienes cuenta?
-                      Registrate</a>
+                    <a
+                      href="#"
+                      class="label-text-alt link link-hover"
+                      onclick="my_modal_3.close(), my_modal.showModal()"
+                      >¿No tienes cuenta? Registrate</a
+                    >
                   </label>
                   <!-- !Sign up -->
                   <dialog id="my_modal" class="modal">
                     <div class="modal-box">
                       <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <button
+                          class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
                       </form>
                       <h3 class="font-bold text-lg">Regístrate</h3>
-                      <hr class="my-2 bg-gray-900">
+                      <hr class="my-2 bg-gray-900" />
                       <form>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Nombre</span>
                           </label>
-                          <input type="text" placeholder="Nombre" class="input input-bordered" [formControl]="nameControl" />
+                          <input
+                            type="text"
+                            placeholder="Nombre"
+                            class="input input-bordered"
+                            [formControl]="nameControl"
+                          />
                         </div>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Apellidos</span>
                           </label>
-                          <input type="text" placeholder="Apellidos" class="input input-bordered" [formControl]="surnameControl" />
+                          <input
+                            type="text"
+                            placeholder="Apellidos"
+                            class="input input-bordered"
+                            [formControl]="surnameControl"
+                          />
                         </div>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Email</span>
                           </label>
-                          <input type="text" placeholder="Email" class="input input-bordered"
-                            [formControl]="emailControl" />
+                          <input
+                            type="text"
+                            placeholder="Email"
+                            class="input input-bordered"
+                            [formControl]="emailControl"
+                          />
                         </div>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Contraseña</span>
                           </label>
-                          <input type="password" placeholder="Contraseña" class="input input-bordered"
-                            [formControl]="passwordControl" />
+                          <input
+                            type="password"
+                            placeholder="Contraseña"
+                            class="input input-bordered"
+                            [formControl]="passwordControl"
+                          />
                         </div>
                         <div class="form-control">
                           <label class="label">
                             <span class="label-text">Confirmar contraseña</span>
                           </label>
-                          <input type="password" placeholder="Confirmar contraseña" class="input input-bordered" />
+                          <input
+                            type="password"
+                            placeholder="Confirmar contraseña"
+                            class="input input-bordered"
+                          />
                         </div>
                         <div class="form-control mt-6">
-                          <button class="btn bg-orange-500" (click)="signup($event)">Sign up</button>
+                          <button
+                            class="btn bg-orange-500"
+                            (click)="signup($event)"
+                            type="button"
+                          >
+                            Sign up
+                          </button>
                         </div>
                       </form>
                     </div>
                   </dialog>
                 </div>
                 <div class="form-control mt-6">
-                  <button class="btn bg-orange-500" (click)="login($event)">Login</button>
+                  <button
+                    class="btn bg-orange-500"
+                    (click)="getUserByEmail($event)"
+                    onclick="my_modal_3.close()"
+                    type="button"
+                  >
+                    Login
+                  </button>
                 </div>
               </form>
             </div>
           </dialog>
         </li>
+        }
       </ul>
     </div>
   </div>
