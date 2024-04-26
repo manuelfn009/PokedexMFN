@@ -20,4 +20,8 @@ export class AuthService {
   signUp(email: string, password: string) {
     return this.s_client.auth.signUp({ email: email, password: password });
   }
+
+  getUser() {
+    return this.s_client.auth.getUserIdentities();
+  }
 }

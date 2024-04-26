@@ -32,6 +32,14 @@ export class BbddService {
       .then(response => response.data as []));
   }
 
+  getUsuarioOnlyByEmail(email: string): Observable<[]> {
+    return from(this.supabase
+      .from('User')
+      .select('*')
+      .eq('email', email)
+      .then(response => response.data as []));
+  }
+
   signOut() {
     this.supabase.auth.signOut();
   }

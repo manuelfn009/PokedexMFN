@@ -41,13 +41,13 @@
       <ul
         class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
       >
-        @if (user) {
+        @if (usuario) {
         <li>
           <strong
             ><h2
-              class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
+              class="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 dark:text-white "
             >
-              Welcome {{ user?.name }}
+              Welcome {{ usuario?.name }}
             </h2>
           </strong>
         </li>
@@ -83,7 +83,7 @@
             >Pricing</a
           >
         </li>
-        @if (user) {
+        @if (usuario) {
         <li>
           <a
             href="#"

@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { BbddService } from '../service/bbdd.service';
+import { CommonUtilsService } from '../service/common-utils.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ import { BbddService } from '../service/bbdd.service';
 })
 export class NavbarComponent {
   private bbddService = inject(BbddService);
+  private commonUtilsService = inject(CommonUtilsService);
 
   passwordControl = new FormControl('', {
     nonNullable: true,
@@ -31,6 +33,24 @@ export class NavbarComponent {
   name: any;
   surname: any;
   user?: any;
+  usuario: any;
+  error = " ";
+
+  supabase = inject(BbddService);
+
+  ngOnInit() {
+    console.log("El usuario es",this.authService.getUser());
+    this.authService.getUser().then((user: any) => {
+      console.log("El usuario es",user);
+      if(user){
+        this.supabase.getUsuarioOnlyByEmail(user.data?.identities[0].email).subscribe((data: any) => {
+          this.commonUtilsService.setUsuario(data[0]);
+          this.usuario = data[0];
+        });
+      };
+
+    });
+  }
 
   correctValidation: boolean = false;
 
@@ -86,6 +106,7 @@ export class NavbarComponent {
             .login(data[0].email, data[0].password)
             .then((data: any) => {
               console.log(data);
+              window.location.href = '/home';
             });
           this.correctValidation = true;
           console.log(data);
@@ -99,6 +120,8 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().then(() => {
+      window.location.href = '/';
+    })    
   }
 }

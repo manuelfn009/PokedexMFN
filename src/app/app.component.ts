@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LeftbarComponent } from './leftbar/leftbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { enviroment } from '../enviroment';
+import { Injectable } from '@angular/core';
+import { AuthService } from './service/auth.service';
+import { BbddService } from './service/bbdd.service';
+import { CommonUtilsService } from './service/common-utils.service';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +20,24 @@ import { FooterComponent } from './footer/footer.component';
 })
 export class AppComponent {
   title = 'pokedexMFN';
+
+
+  supabase = inject(BbddService);
+  authService = inject(AuthService);
+  commonUtilsService = inject(CommonUtilsService);
+  usuario = this.commonUtilsService.getUsuario();
+
+  ngOnInit() {
+    console.log("El usuario es",this.authService.getUser());
+    this.authService.getUser().then((user: any) => {
+      console.log("El usuario es",user);
+      if(user){
+        this.supabase.getUsuarioOnlyByEmail(user.data?.identities[0].email).subscribe((data: any) => {
+          this.commonUtilsService.setUsuario(data[0]);
+          this.usuario = data[0];
+        });
+      };
+
+    });
+  }
 }
