@@ -24,6 +24,14 @@ export class NavbarComponent {
       Validators.maxLength(15),
     ],
   });
+  confirmPasswordControl = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(15),
+    ],
+  })
   emailControl = new FormControl('', Validators.required);
   nameControl = new FormControl('', Validators.required);
   surnameControl = new FormControl('', Validators.required);
@@ -34,7 +42,7 @@ export class NavbarComponent {
   surname: any;
   user?: any;
   usuario: any;
-  error = " ";
+  err: string[] = [];
 
   supabase = inject(BbddService);
 
@@ -58,9 +66,15 @@ export class NavbarComponent {
   login($event: Event) {}
 
   signup($event: Event) {
-    $event.preventDefault();
+    $event.preventDefault();    
+    this.limpiarLista();
+
+    if (!this.passwordControl.valid){
+      this.limpiarLista();
+      this.err.push("La contraseña debe tener entre 6 y 15 caracteres");
+    }
+
     if (
-      this.passwordControl.valid &&
       this.emailControl.valid &&
       this.nameControl.valid &&
       this.surnameControl.valid
@@ -70,7 +84,11 @@ export class NavbarComponent {
       this.email = this.emailControl.value;
       this.password = this.passwordControl.value;
 
-      this.bbddService
+      if (this.password !== this.confirmPasswordControl.value) {
+        this.err.push("Las contraseñas no coinciden");
+        return;
+      }else{
+        this.bbddService
         .signUp(this.name, this.surname, this.email, this.password)
         .subscribe({
           next: (data: any) => {
@@ -85,16 +103,21 @@ export class NavbarComponent {
           },
           error: (error) => {
             console.log(error);
+            this.err.push("Email ya registrado");
           },
         });
+      }
+      
     } else {
       console.log('error de validacion');
+      this.err.push("Todos los campos son obligatorios");      
     }
   }
 
   getUserByEmail($event: Event) {
     //$event.preventDefault();
-
+    
+    this.limpiarLista();
     this.email = this.emailControl.value;
     this.password = this.passwordControl.value;
 
@@ -115,8 +138,14 @@ export class NavbarComponent {
       error: (error) => {
         this.correctValidation = false;
         console.log(error);
+        this.err.push("Email o contraseña incorrecta");
       },
     });
+    
+  }
+
+  limpiarLista(){
+    this.err = [];
   }
 
   logout() {

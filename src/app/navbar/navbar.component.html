@@ -97,6 +97,7 @@
         <li>
           <a
             href="#"
+            (click)="limpiarLista()"
             onclick="my_modal_3.showModal()"
             class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
             >Log In</a
@@ -212,13 +213,36 @@
                             type="password"
                             placeholder="Confirmar contraseña"
                             class="input input-bordered"
+                            [formControl]="confirmPasswordControl"
                           />
                         </div>
+                        @if (err.length > 0) {
+                          @for (e of err; track $index) {
+                        <div class="alert alert-error shadow-lg flex mt-1">
+                          <div class="flex  ">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="stroke-current flex-shrink-0 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>{{err}}</span>
+                          </div>
+                        </div>
+                       }}
                         <div class="form-control mt-6">
                           <button
                             class="btn bg-orange-500"
                             (click)="signup($event)"
                             type="button"
+                            
                           >
                             Sign up
                           </button>
@@ -228,6 +252,29 @@
                   </dialog>
                 </div>
                 <div class="form-control mt-6">
+                  @if (err.length > 0) {
+                    @for (e of err; track $index) {
+                      <div class="alert alert-error shadow-lg flex mt-1">
+                        <div class="flex  ">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="stroke-current flex-shrink-0 h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <span>{{e}}</span>
+                        </div>
+                      </div>
+                    }
+                    
+                  }
                   <button
                     class="btn bg-orange-500"
                     (click)="getUserByEmail($event)"
