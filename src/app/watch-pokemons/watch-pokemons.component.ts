@@ -116,7 +116,7 @@ export class WatchPokemonsComponent implements OnInit {
               }
               this.pokemon = pokemon;
               this.pokemonsListAux.push(this.pokemon);
-              
+
               this.pokemonsListAux.sort((a: any, b: any) => a.id - b.id);
             });
         }
@@ -142,7 +142,7 @@ export class WatchPokemonsComponent implements OnInit {
                   ' 0%,' +
                   pokemon.color2 +
                   ' 100%)';
-              }else {
+              } else {
                 pokemon.bg_color = pokemon.color1;
               }
               this.pokemon = pokemon;
@@ -153,8 +153,10 @@ export class WatchPokemonsComponent implements OnInit {
       });
   }
 
-shinyNS() {
-  this.shiny = true;
-}
-
+  shinyNS() {
+    if (this.shiny) this.shiny = false;
+    else this.shiny = true;
+  }
+  
+  
 }

@@ -1,19 +1,30 @@
+<div class="flex justify-center mt-3">
+  @if (!shiny) {
+  <button class="btn btn-primary" (click)="shinyNS()">
+    Watch Shiny Pokemons
+  </button>
+  } @else {
+  <button class="btn btn-primary" (click)="shinyNS()">
+    Watch Normal Pokemons
+  </button>
+  }
+</div>
 <div
   class="w-full h-full flex flex-wrap justify-center p-20 items-center gap-32"
 >
   @for (p of pokemonsListAux; track $index) {
   <div
-    class="card w-full md:w-1/5 h-full p-6 border-2 border-white items-center"
+    class="card rounded w-full md:w-1/4 h-full p-8 border-8 border-b-8 border-white items-center"
     [style.background]="p.bg_color"
   >
     @if(!shiny){
     <img
-      src="{{ p.sprites.front_default }}"
+      src="{{ p.sprites.other.home.front_default }}"
       class="w-3/4 bg-slate-100 rounded-full bg-opacity-10 mb-2"
     />
     } @else {
-      <img
-      src="{{ p.sprites.front_shiny }}"
+    <img
+      src="{{ p.sprites.other.home.front_shiny }}"
       class="w-3/4 bg-slate-100 rounded-full bg-opacity-10 mb-2"
     />
     }
@@ -28,29 +39,38 @@
       <span class="text-gray-100"> &nbsp; / {{ p.types[1].type.name }}</span>
       }
     </div>
-    <div class="mt-2 flex">
-      <button
-        value="{{ p.id }}"
-        class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
-        :disabled="true"
-      >
-        <span
-          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+    
+    <div class="card-back h-full w-full top-0 left-0 rounded p-8">
+      @for (stat of p.stats; track $index) {
+      <div class="flex justify-between mb-1">
+        <span class="text-base font-medium dark:text-white">{{
+          p.stats[$index].stat.name
+        }}</span>
+        <span class="text-sm font-medium text-blue-700 dark:text-white">{{
+          p.stats[$index].base_stat
+        }}</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div
+          class="h-2.5 rounded-full"
+          [style.width.%]="p.stats[$index].base_stat * 100 / 255"
+          [style.background]="p.bg_color"
+        ></div>
+      </div>
+      }
+      <div class="mt-2 flex w-full justify-center">
+        <button
+          value="{{ p.id }}"
+          class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+          :disabled="true"
         >
-          Add to team
-        </span>
-      </button>
-      <button
-        value="{{ p.id }}"
-        (click)="shinyNS()"
-        class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
-      >
-        <span
-          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
-        >
-          Shiny
-        </span>
-      </button>
+          <span
+            class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+          >
+            Add to team
+          </span>
+        </button>
+      </div>
     </div>
   </div>
   }
@@ -59,18 +79,15 @@
 <div class="flex flex-col items-center">
   <!-- Help text -->
   <span class="text-sm text-gray-700 dark:text-gray-400">
-    Showing
-    <span class="font-semibold text-gray-900 dark:text-white">{{ limit }}</span>
-    to
+    Page
     <span class="font-semibold text-gray-900 dark:text-white">{{
-      (offset + 10) / 10
+      (offset + 15) / 15
     }}</span>
     of
-    <span class="font-semibold text-gray-900 dark:text-white">1302</span>
-    Entries
+    <span class="font-semibold text-gray-900 dark:text-white">87</span>
   </span>
   <!-- Buttons -->
-  <div class="inline-flex mt-2 xs:mt-0">
+  <div class="inline-flex mt-2 xs:mt-0 mb-2">
     <button
       (click)="prev()"
       class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"

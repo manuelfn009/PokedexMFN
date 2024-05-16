@@ -1,4 +1,32 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.card:hover, .card-back:hover .card{
+    transform: rotateY(180deg) ;
+    transition: all 1s;
+    z-index: 0;
+}
+
+.card-back{
+    z-index: 0;
+    display: none;
+    background-color: transparent;
+    transition-property: background-color;
+    transition-duration: 1000ms;
+    transition-timing-function: ease-in-out; 
+}
+
+.card{
+    transition: all 1s;
+}
+
+.card:hover  .card-back{
+    z-index: 1;
+    display: block;    
+    position: absolute;
+    background-color: rgb(28, 28, 53);
+    transform: rotateY(180deg);
+    transition-delay: 2s;    
+}
