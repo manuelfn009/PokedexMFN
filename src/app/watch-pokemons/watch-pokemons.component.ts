@@ -11,7 +11,8 @@ export class WatchPokemonsComponent implements OnInit {
   pokemon: any;
   pokemonsListAux: any = [];
   offset: number = 0;
-  limit: number = 10;
+  limit: number = 15;
+  shiny: boolean = false;
 
   constructor(private pokeApiService: PokeApiService) {}
 
@@ -91,7 +92,7 @@ export class WatchPokemonsComponent implements OnInit {
   }
 
   next() {
-    this.offset += 10;
+    this.offset += 15;
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
@@ -122,7 +123,7 @@ export class WatchPokemonsComponent implements OnInit {
       });
   }
   prev() {
-    this.offset -= 10;
+    this.offset -= 15;
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
@@ -151,4 +152,9 @@ export class WatchPokemonsComponent implements OnInit {
         }
       });
   }
+
+shinyNS() {
+  this.shiny = true;
+}
+
 }

@@ -1,43 +1,87 @@
-<br>
-<div class="flex flex-col items-center">
-    <!-- Help text -->
-    <span class="text-sm text-gray-700 dark:text-gray-400">
-      Showing
-      <span class="font-semibold text-gray-900 dark:text-white">{{limit}}</span> to
-      <span class="font-semibold text-gray-900 dark:text-white">{{(offset + 10) / 10}}</span> of
-      <span class="font-semibold text-gray-900 dark:text-white">1302</span> Entries
-    </span>
-    <!-- Buttons -->
-    <div class="inline-flex mt-2 xs:mt-0">
-      <button (click)="prev()"
-        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+<div
+  class="w-full h-full flex flex-wrap justify-center p-20 items-center gap-32"
+>
+  @for (p of pokemonsListAux; track $index) {
+  <div
+    class="card w-full md:w-1/5 h-full p-6 border-2 border-white items-center"
+    [style.background]="p.bg_color"
+  >
+    @if(!shiny){
+    <img
+      src="{{ p.sprites.front_default }}"
+      class="w-3/4 bg-slate-100 rounded-full bg-opacity-10 mb-2"
+    />
+    } @else {
+      <img
+      src="{{ p.sprites.front_shiny }}"
+      class="w-3/4 bg-slate-100 rounded-full bg-opacity-10 mb-2"
+    />
+    }
+
+    <p class="text-gray-500 bg-slate-800 bg-opacity-10 rounded p-2">
+      #{{ p.id }}
+    </p>
+    <p class="text-gray-100 font-bold">{{ p.name }}</p>
+    <div class="text-gray-100 flex w-full justify-center">
+      <span class="text-gray-100">{{ p.types[0].type.name }} </span>
+      @if (p.types[1]) {
+      <span class="text-gray-100"> &nbsp; / {{ p.types[1].type.name }}</span>
+      }
+    </div>
+    <div class="mt-2 flex">
+      <button
+        value="{{ p.id }}"
+        class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+        :disabled="true"
       >
-        Prev
+        <span
+          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+        >
+          Add to team
+        </span>
       </button>
-      <button (click)="next()"
-        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      <button
+        value="{{ p.id }}"
+        (click)="shinyNS()"
+        class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
       >
-        Next
+        <span
+          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+        >
+          Shiny
+        </span>
       </button>
     </div>
   </div>
-<div class="w-full h-full flex flex-wrap justify-center p-20 gap-32">
-  @for (p of pokemonsListAux; track $index) {
-  <div class="card w-1/4 h-96 p-6 border-2 border-white   items-center" [style.background]="p.bg_color">
-    <img src="{{ p.sprites.front_default }}" class="w-3/4 bg-slate-100 rounded-full bg-opacity-10 mb-2" />
-    <p class="text-gray-500 bg-slate-800 bg-opacity-10 rounded p-2">#{{ p.id }}</p>
-    <p class="text-gray-100 font-bold">{{ p.name }}</p>
-    <span class="text-gray-100">{{ p.types[0].type.name }}</span>
-    @if (p.types[1]) {
-        <span class="text-gray-100"> / {{ p.types[1].type.name }}</span>
-    }
-    
-    <button value="{{p.id}}" class="absolute inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-        Add to team
-        </span>
-        </button>
-  </div>
   }
 </div>
-
+<br />
+<div class="flex flex-col items-center">
+  <!-- Help text -->
+  <span class="text-sm text-gray-700 dark:text-gray-400">
+    Showing
+    <span class="font-semibold text-gray-900 dark:text-white">{{ limit }}</span>
+    to
+    <span class="font-semibold text-gray-900 dark:text-white">{{
+      (offset + 10) / 10
+    }}</span>
+    of
+    <span class="font-semibold text-gray-900 dark:text-white">1302</span>
+    Entries
+  </span>
+  <!-- Buttons -->
+  <div class="inline-flex mt-2 xs:mt-0">
+    <button
+      (click)="prev()"
+      class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    >
+      Prev
+    </button>
+    <button
+      (click)="next()"
+      class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+    >
+      Next
+    </button>
+  </div>
+</div>
