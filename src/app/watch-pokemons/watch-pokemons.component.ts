@@ -45,6 +45,14 @@ export class WatchPokemonsComponent implements OnInit {
         }
       });
   }
+  
+  // search(value: string) {
+  //   this.pokeApiService
+  //     .getAllCharactersByName(value)
+  //     .subscribe((pokemons: any) => {
+  //       this.pokemons = pokemons.results;
+  //     });
+  // }
 
   getColor(type: string): string {
     switch (type) {

@@ -24,4 +24,6 @@ export class PokeApiService {
   getPokemonsByUrl(urls: string[]){
     return urls.map(url => this.getPokemonByUrl(url));
   }
+
+  
 }

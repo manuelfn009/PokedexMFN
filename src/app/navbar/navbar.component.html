@@ -100,208 +100,300 @@
             >Log In</a
           >
           <dialog id="my_modal_3" class="modal">
-            <div class="modal-box">
-              <form method="dialog">
-                <button
-                  class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            <div class="relative p-4 w-full max-w-md max-h-full">
+              <!-- Modal content -->
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div
+                  class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
                 >
-                  ✕
-                </button>
-              </form>
-              <h3 class="font-bold text-lg">Sign in or Register</h3>
-              <hr class="my-2 bg-gray-900" />
-              <form>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Email</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    class="input input-bordered"
-                    [formControl]="emailControl"
-                  />
+                  <h3
+                    class="text-xl font-semibold text-gray-900 dark:text-white flex"
+                  >
+                    <img
+                      src="../../assets/img/IconoPokemon.png"
+                      class="h-8 me-3"
+                      alt="PokedexMFN Logo"
+                    />Sign in to PokedexMFN
+                  </h3>
+                  <button
+                    type="button"
+                    class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-red-500 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-red-500"
+                    data-modal-hide="authentication-modal"
+                    onclick="my_modal_3.close()"
+                  >
+                    <svg
+                      class="w-3 h-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                      />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                  </button>
                 </div>
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Password</span>
-                  </label>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    class="input input-bordered"
-                    [formControl]="passwordControl"
-                  />
-                  <label class="label">
-                    <a href="#" class="label-text-alt link link-hover"
-                      >Forgot your password?</a
-                    >
-                  </label>
-                  <label class="label">
-                    <a
-                      href="#"
-                      class="label-text-alt link link-hover"
-                      onclick="my_modal_3.close(), my_modal.showModal()"
-                      >Don't have an account? Register</a
-                    >
-                  </label>
-                  <!-- !Sign up -->
-                  <dialog id="my_modal" class="modal">
-                    <div class="modal-box">
-                      <form method="dialog">
-                        <button
-                          class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+                  <form class="space-y-4" action="#">
+                    <div>
+                      <label
+                        for="email"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Your email</label
+                      >
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="name@company.com"
+                        [formControl]="emailControl"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label
+                        for="password"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >Your password</label
+                      >
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="••••••••"
+                        [formControl]="passwordControl"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        required
+                      />
+                    </div>
+                    <div class="flex justify-between">
+                      <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                          <input
+                            id="remember"
+                            type="checkbox"
+                            value=""
+                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                            required
+                          />
+                        </div>
+                        <label
+                          for="remember"
+                          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >Remember me</label
                         >
-                          ✕
-                        </button>
-                      </form>
-                      <h3 class="font-bold text-lg">Register</h3>
-                      <hr class="my-2 bg-gray-900" />
-                      <form>
-                        <div class="form-control">
-                          <label class="label">
-                            <span class="label-text">Name</span>
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Name"
-                            class="input input-bordered"
-                            [formControl]="nameControl"
-                          />
-                        </div>
-                        <div class="form-control">
-                          <label class="label">
-                            <span class="label-text">Surname</span>
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Surname"
-                            class="input input-bordered"
-                            [formControl]="surnameControl"
-                          />
-                        </div>
-                        <div class="form-control">
-                          <label class="label">
-                            <span class="label-text">Email</span>
-                          </label>
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            class="input input-bordered"
-                            [formControl]="emailControl"
-                          />
-                        </div>
-                        <div class="form-control">
-                          <label class="label">
-                            <span class="label-text">Password</span>
-                          </label>
-                          <input
-                            type="password"
-                            placeholder="Password"
-                            class="input input-bordered"
-                            [formControl]="passwordControl"
-                          />
-                        </div>
-                        <div class="form-control">
-                          <label class="label">
-                            <span class="label-text">Confirm password</span>
-                          </label>
-                          <input
-                            type="password"
-                            placeholder="Confirm password"
-                            class="input input-bordered"
-                            [formControl]="confirmPasswordControl"
-                          />
-                        </div>
-                        @if (err.length > 0) { @for (e of err; track $index) {
-                        <div class="alert alert-error shadow-lg flex mt-1">
-                          <div class="flex">
+                      </div>
+                      <a
+                        href="#"
+                        class="text-sm text-orange-400 hover:underline dark:text-orange-400"
+                        >Lost Password?</a
+                      >
+                    </div>
+                    <button
+                      type="button"
+                      (click)="getUserByEmail($event)"
+                      onclick="my_modal_3.close()"
+                      class="btn relative w-full inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                    >
+                      <span
+                        class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md group-hover:bg-opacity-0"
+                      >
+                        Login to your account
+                      </span>
+                    </button>
+                    <div
+                      class="text-sm font-medium text-gray-500 dark:text-gray-300"
+                    >
+                      Not registered?
+                      <a
+                        href="#"
+                        onclick="my_modal_3.close(), my_modal.showModal()"
+                        class="text-blue-700 hover:underline dark:text-orange-400"
+                        >Create account</a
+                      >
+                    </div>
+                  </form>
+                  <dialog id="my_modal" class="modal">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                      <!-- Modal content -->
+                      <div
+                        class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                      >
+                        <!-- Modal header -->
+                        <div
+                          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+                        >
+                          <h3
+                            class="text-xl font-semibold text-gray-900 dark:text-white flex"
+                          >
+                            <img
+                              src="../../assets/img/IconoPokemon.png"
+                              class="h-8 me-3"
+                              alt="PokedexMFN Logo"
+                            />Sign up to PokedexMFN
+                          </h3>
+                          <button
+                            type="button"
+                            class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-red-500 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-red-500"
+                            data-modal-hide="authentication-modal"
+                            onclick="my_modal.close()"
+                          >
                             <svg
+                              class="w-3 h-3"
+                              aria-hidden="true"
                               xmlns="http://www.w3.org/2000/svg"
-                              class="stroke-current flex-shrink-0 h-6 w-6"
                               fill="none"
-                              viewBox="0 0 24 24"
+                              viewBox="0 0 14 14"
                             >
                               <path
+                                stroke="currentColor"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
-                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                               />
                             </svg>
-                            <span>{{ err }}</span>
-                          </div>
-                        </div>
-                        }}
-                        <div class="form-control mt-6">
-                          <button
-                            class="btn bg-orange-500"
-                            (click)="signup($event)"
-                            type="button"
-                          >
-                            Sign up
+                            <span class="sr-only">Close modal</span>
                           </button>
                         </div>
-                      </form>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5">
+                          <form class="space-y-4" action="#">
+                            <div>
+                              <label
+                                for="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Name</label
+                              >
+                              <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Roberto"
+                                [formControl]="nameControl"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label
+                                for="surname"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Surname</label
+                              >
+                              <input
+                                type="text"
+                                name="surname"
+                                id="surname"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Fernandez Nevado"
+                                [formControl]="surnameControl"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label
+                                for="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Your email</label
+                              >
+                              <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="name@company.com"
+                                [formControl]="emailControl"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label
+                                for="password"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Your password</label
+                              >
+                              <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="••••••••"
+                                [formControl]="passwordControl"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label
+                                for="password"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >Confirm your password</label
+                              >
+                              <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="••••••••"
+                                [formControl]="confirmPasswordControl"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                required
+                              />
+                            </div>
+
+                            @if (err.length > 0) {
+                            <div class="alert alert-error shadow-lg flex mt-1">
+                              <div class="flex">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="stroke-current flex-shrink-0 h-6 w-6"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  />
+                                </svg>
+                                <br>
+                                <ol>
+                                @for (e of err; track $index) {
+
+                                <li>{{ e }}</li>
+
+                                }</ol>
+                              </div>
+                            </div>
+                            }
+                            <button
+                              type="button"
+                              (click)="signup($event)"
+                              onclick="my_modal_3.close()"
+                              class="btn relative w-full inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+                            >
+                              <span
+                                class="relative px-5 py-2.5 transition-all ease-in duration-75 rounded-md group-hover:bg-opacity-0"
+                              >
+                                Sign up
+                              </span>
+                            </button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </dialog>
                 </div>
-
-                <div class="form-control mt-6">
-                  <ul>
-                    @if (err.length > 0) {
-                    <li>
-                      <div class="alert alert-error shadow-lg flex mt-1">
-                        <div class="flex">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="stroke-current flex-shrink-0 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span>{{ err }}</span>
-                        </div>
-                      </div>
-                    </li>
-                    }
-                  </ul>
-                  <button
-                    class="btn bg-orange-500"
-                    (click)="getUserByEmail($event)"
-                    onclick="my_modal_3.close()"
-                    type="button"
-                  >
-                    Login
-                  </button>
-                  @if (err.length > 0) { @for (e of err; track $index) {
-                    <div class="alert alert-error shadow-lg flex mt-1">
-                      <div class="flex">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="stroke-current flex-shrink-0 h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span>{{ err }}</span>
-                      </div>
-                    </div>
-                    }}
-                </div>
-              </form>
+              </div>
             </div>
           </dialog>
         </li>

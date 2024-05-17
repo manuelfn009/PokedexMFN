@@ -71,7 +71,7 @@ export class NavbarComponent {
 
     if (!this.passwordControl.valid){
       this.limpiarLista();
-      this.err.push("La contraseña debe tener entre 6 y 15 caracteres");
+      this.err.push("Password must have between 6 and 15 characters");
     }
 
     if (
