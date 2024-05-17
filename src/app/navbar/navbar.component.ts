@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';0
 import { BbddService } from '../service/bbdd.service';
 import { CommonUtilsService } from '../service/common-utils.service';
 
@@ -85,7 +85,7 @@ export class NavbarComponent {
       this.password = this.passwordControl.value;
 
       if (this.password !== this.confirmPasswordControl.value) {
-        this.err.push("Las contraseñas no coinciden");
+        this.err.push("Passwords don't match");
         return;
       }else{
         this.bbddService
@@ -103,14 +103,14 @@ export class NavbarComponent {
           },
           error: (error) => {
             console.log(error);
-            this.err.push("Email ya registrado");
+            this.err.push("Email already registered");
           },
         });
       }
       
     } else {
       console.log('error de validacion');
-      this.err.push("Todos los campos son obligatorios");      
+      this.err.push("All fields are required");      
     }
   }
 
@@ -138,7 +138,7 @@ export class NavbarComponent {
       error: (error) => {
         this.correctValidation = false;
         console.log(error);
-        this.err.push("Email o contraseña incorrecta");
+        this.err.push("Incorrect email or password");
       },
     });
     

@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900  w-full ">
+<nav class="bg-white border-gray-200 dark:bg-gray-900 w-full">
   <div
     class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
   >
@@ -8,8 +8,7 @@
         class="h-8"
         alt="Flowbite Logo"
       />
-      <span
-        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:"
         >PokedexMFN</span
       >
     </a>
@@ -44,9 +43,7 @@
         @if (usuario) {
         <li>
           <strong
-            ><h2
-              class="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 dark:text-white"
-            >
+            ><h2 class="block py-2 px-3 rounded md:bg-transparent md:p-0 dark:">
               Welcome {{ usuario?.name }}
             </h2>
           </strong>
@@ -54,32 +51,32 @@
         }
         <li>
           <a
-            class="block py-2 px-3 text-white rounded md:bg-transparent md:hover:text-orange-500 md:p-0 dark:text-white md:hover:dark:text-orange-400"
-            routerLink="/home"
-            routerLinkActive="dark:text-orange-400"
+            class="block py-2 px-3 rounded md:bg-transparent dark:text-white md:hover:text-orange-500 md:p-0 dark: md:hover:dark:text-orange-400"
+            [routerLink]="'/home'"
+            [routerLinkActive]="'!text-orange-400'"
             >Home</a
           >
         </li>
 
         <li>
           <a
-            routerLink="/watchPokemons"
-            routerLinkActive="dark:text-orange-400"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            [routerLink]="'/watchPokemons'"
+            class="block py-2 px-3 dark:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark: md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover: md:dark:hover:bg-transparent"
+            [routerLinkActive]="'!text-orange-400'"
             >Watch Pokemons</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            class="block py-2 px-3 dark:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark: md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover: md:dark:hover:bg-transparent"
             >Services</a
           >
         </li>
         <li>
           <a
             href="#"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            class="block py-2 px-3 dark:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark: md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover: md:dark:hover:bg-transparent"
             >Pricing</a
           >
         </li>
@@ -88,7 +85,7 @@
           <a
             href="#"
             (click)="logout()"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            class="block py-2 px-3 dark:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark: md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover: md:dark:hover:bg-transparent"
             >Log out</a
           >
         </li>
@@ -99,7 +96,7 @@
             href="#"
             (click)="limpiarLista()"
             onclick="my_modal_3.showModal()"
-            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark:text-white md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+            class="block py-2 px-3 dark:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 md:p-0 dark: md:dark:hover:text-orange-400 dark:hover:bg-gray-700 dark:hover: md:dark:hover:bg-transparent"
             >Log In</a
           >
           <dialog id="my_modal_3" class="modal">
@@ -111,7 +108,7 @@
                   ✕
                 </button>
               </form>
-              <h3 class="font-bold text-lg">Inicia sesión o Regístrate</h3>
+              <h3 class="font-bold text-lg">Sign in or Register</h3>
               <hr class="my-2 bg-gray-900" />
               <form>
                 <div class="form-control">
@@ -127,17 +124,17 @@
                 </div>
                 <div class="form-control">
                   <label class="label">
-                    <span class="label-text">Contraseña</span>
+                    <span class="label-text">Password</span>
                   </label>
                   <input
                     type="password"
-                    placeholder="Contraseña"
+                    placeholder="Password"
                     class="input input-bordered"
                     [formControl]="passwordControl"
                   />
                   <label class="label">
                     <a href="#" class="label-text-alt link link-hover"
-                      >¿Olvidaste tu contraseña?</a
+                      >Forgot your password?</a
                     >
                   </label>
                   <label class="label">
@@ -145,7 +142,7 @@
                       href="#"
                       class="label-text-alt link link-hover"
                       onclick="my_modal_3.close(), my_modal.showModal()"
-                      >¿No tienes cuenta? Registrate</a
+                      >Don't have an account? Register</a
                     >
                   </label>
                   <!-- !Sign up -->
@@ -158,27 +155,27 @@
                           ✕
                         </button>
                       </form>
-                      <h3 class="font-bold text-lg">Regístrate</h3>
+                      <h3 class="font-bold text-lg">Register</h3>
                       <hr class="my-2 bg-gray-900" />
                       <form>
                         <div class="form-control">
                           <label class="label">
-                            <span class="label-text">Nombre</span>
+                            <span class="label-text">Name</span>
                           </label>
                           <input
                             type="text"
-                            placeholder="Nombre"
+                            placeholder="Name"
                             class="input input-bordered"
                             [formControl]="nameControl"
                           />
                         </div>
                         <div class="form-control">
                           <label class="label">
-                            <span class="label-text">Apellidos</span>
+                            <span class="label-text">Surname</span>
                           </label>
                           <input
                             type="text"
-                            placeholder="Apellidos"
+                            placeholder="Surname"
                             class="input input-bordered"
                             [formControl]="surnameControl"
                           />
@@ -188,7 +185,7 @@
                             <span class="label-text">Email</span>
                           </label>
                           <input
-                            type="text"
+                            type="email"
                             placeholder="Email"
                             class="input input-bordered"
                             [formControl]="emailControl"
@@ -196,22 +193,22 @@
                         </div>
                         <div class="form-control">
                           <label class="label">
-                            <span class="label-text">Contraseña</span>
+                            <span class="label-text">Password</span>
                           </label>
                           <input
                             type="password"
-                            placeholder="Contraseña"
+                            placeholder="Password"
                             class="input input-bordered"
                             [formControl]="passwordControl"
                           />
                         </div>
                         <div class="form-control">
                           <label class="label">
-                            <span class="label-text">Confirmar contraseña</span>
+                            <span class="label-text">Confirm password</span>
                           </label>
                           <input
                             type="password"
-                            placeholder="Confirmar contraseña"
+                            placeholder="Confirm password"
                             class="input input-bordered"
                             [formControl]="confirmPasswordControl"
                           />
@@ -252,7 +249,7 @@
 
                 <div class="form-control mt-6">
                   <ul>
-                    @if (err.length > 0) { 
+                    @if (err.length > 0) {
                     <li>
                       <div class="alert alert-error shadow-lg flex mt-1">
                         <div class="flex">
@@ -273,7 +270,7 @@
                         </div>
                       </div>
                     </li>
-                    } 
+                    }
                   </ul>
                   <button
                     class="btn bg-orange-500"
@@ -283,6 +280,26 @@
                   >
                     Login
                   </button>
+                  @if (err.length > 0) { @for (e of err; track $index) {
+                    <div class="alert alert-error shadow-lg flex mt-1">
+                      <div class="flex">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="stroke-current flex-shrink-0 h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span>{{ err }}</span>
+                      </div>
+                    </div>
+                    }}
                 </div>
               </form>
             </div>
