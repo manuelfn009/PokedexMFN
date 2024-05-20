@@ -1,6 +1,9 @@
-import { Component, OnInit, Inject, inject } from '@angular/core';
+import { Component, OnInit, Inject, inject, signal } from '@angular/core';
 import { PokeApiService } from '../service/poke-api.service';
 import { CommonUtilsService } from '../service/common-utils.service';
+import { BbddService } from '../service/bbdd.service';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-watch-pokemons',
@@ -16,12 +19,22 @@ export class WatchPokemonsComponent implements OnInit {
   shiny: boolean = false;
   
   private commonUtilsService = inject(CommonUtilsService);
-  user = this.commonUtilsService.getUsuario();
+  private bbddService = inject(BbddService);
+  user?: any = this.commonUtilsService.getUsuario();
+  email?: string;
+  idUser = signal(0);
 
   constructor(private pokeApiService: PokeApiService) {}
 
   ngOnInit() {
-    console.log(this.user);
+    this.email = this.user?.email;
+    if(this.email){
+    this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
+      console.log(data);
+      this.idUser.set(data[0].idUser);
+    })
+  }
+    console.log("Usuario desde WP", this.user?.email);
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
@@ -143,5 +156,15 @@ export class WatchPokemonsComponent implements OnInit {
     else this.shiny = true;
   }
   
+  addToTeam(idPokemon: number, pokemonType: string, pokemonName: string) {
+    this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
+      if(team.length < 5) {
+        console.log("Me caben mas" + team.length)
+        this.bbddService.addTeam(idPokemon, pokemonType, pokemonName, this.idUser());
+      }else{
+        console.log("No me caben mas")
+      }
+    })
+  }
   
 }

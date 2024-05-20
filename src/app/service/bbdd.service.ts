@@ -18,7 +18,7 @@ export class BbddService {
   signUp(name: string, surname: string, email: string, password: string): Observable<[]> {
     return from(this.supabase
       .from('User')
-      .insert([{ name: name, surname: surname, email: email, password: password}])
+      .insert([{ name: name, surname: surname, email: email, password: password }])
       .select()
       .then(response => response.data as []));
   }
@@ -42,5 +42,21 @@ export class BbddService {
 
   signOut() {
     this.supabase.auth.signOut();
+  }
+
+  addTeam(idPokemon: number, pokemonType: string, pokemonName: string, idUser: number) {
+    this.supabase
+      .from('Team')
+      .insert([{ idPokemon: idPokemon, pokemonType: pokemonType, pokemonName: pokemonName, idUser: idUser}])
+      .select()
+      .then(response => response.data as [])
+  }
+
+  getTeam(idUser: number): Observable<[]> {
+    return from(this.supabase
+      .from('Team')
+      .select('*')
+      .eq('idUser', idUser)
+      .then(response => response.data as []));
   }
 }
