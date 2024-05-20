@@ -56,7 +56,6 @@ export class NavbarComponent {
           this.usuario = data[0];
         });
       };
-
     });
   }
 

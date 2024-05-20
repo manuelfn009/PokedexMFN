@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class PokeApiService {
   private baseUrl = "https://pokeapi.co/api/v2/pokemon/";
+  private typeUrl = "https://pokeapi.co/api/v2/type/";
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +18,12 @@ export class PokeApiService {
     return this.http.get<any[]>(url.toString());
   }
 
+  getPokemonByName(name: string){
+    let url = new URL(this.baseUrl);
+    url.searchParams.set('name', name);
+    return this.http.get<any>(url.toString());
+  }
+
   getPokemonByUrl(url: string){
     return this.http.get<any>(url.toString());
   }
@@ -25,5 +32,13 @@ export class PokeApiService {
     return urls.map(url => this.getPokemonByUrl(url));
   }
 
+  getAllTypes(){
+    let url = new URL(this.typeUrl);
+    return this.http.get<any[]>(url.toString());
+  }
+
+  getTypeByUrl(url: string){
+    return this.http.get<any>(url.toString());
+  }
   
 }
