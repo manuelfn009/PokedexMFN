@@ -92,6 +92,7 @@ export class WatchPokemonsComponent implements OnInit {
 
   next() {
     this.offset += 15;
+    this.pokemonsListAux = [];
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
