@@ -6,22 +6,16 @@
                     Type
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    No effect
+                    Weak to
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Not very effect
+                    No effective to
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Very effect
+                    Very effective to
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Immune
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Half damage from
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Weak
+                    Immune to
                 </th>
             </tr>
         </thead>
@@ -31,28 +25,12 @@
             <tr
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <th scope="row"
-                    class=" flex  items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    class=" flex flex-wrap items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <img src="../../assets/img/{{t.name}}.png" class="w-10 h-10">{{t.name}}
                 </th>
-
-                <td class="px-6 py-4 ">
-                    <div class="flex flex-wrap gap-2">
-                        @for(d of t.damage_relations.double_damage_from; track $index) {
-                        <img src="../../assets/img/{{d.name}}.png" class="w-10 h-10">
-
-                        }
-                    </div>
-                </td>
                 <td class="px-6 py-4">
                     <div class="flex flex-wrap gap-2">
-                        @for (d of t.damage_relations.half_damage_from; track $index) {
-                        <img src="../../assets/img/{{d.name}}.png" class="w-10 h-10">
-                        }
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                    <div class="flex flex-wrap gap-2">
-                        @for (d of t.damage_relations.no_damage_from; track $index) {
+                        @for (d of t.damage_relations.double_damage_from; track $index) {
                         <img src="../../assets/img/{{d.name}}.png" class="w-10 h-10">
                         }
                     </div>
