@@ -65,7 +65,29 @@ export class MyTeamComponent {
         this.idUser = data[0].idUser;
         console.log("idUser",this.idUser);
         console.log("idPokemon",id);
-        this.bbddService.deletePokemonFromTeam(id, this.idUser);
+        this.bbddService.deletePokemonFromTeam(id, this.idUser).subscribe((data: any) => {
+          console.log(data);
+          this.pokemons = [];
+          this.listId = [];
+          this.bbddService.getTeam(this.idUser).subscribe((team: any) => {
+            console.log(team.length);
+            for (let i = 0; i < team.length; i++) {
+              this.listId.push(team[i].idPokemon);
+              console.log(this.listId);
+            }
+            for (let i = 0; i < this.listId.length; i++) {
+              this.pokeApiService
+                .getPokemonsById(this.listId[i])
+                .subscribe((pokemon: any) => {
+                  this.pokemon = pokemon
+                  this.pokemons.push(this.pokemon)
+                  console.log(this.pokemons);
+                  console.log(this.listId[i]);
+                })
+            }
+            console.log("Pokemons", this.pokemons)
+          })
+        });
       })
     }}
 

@@ -60,11 +60,12 @@ export class BbddService {
       .then(response => response.data as []));
   }
 
-  deletePokemonFromTeam(idPokemon: number, idUser: number) {
-    this.supabase
+  deletePokemonFromTeam(idPokemon: number, idUser: number): Observable<[]> {
+    return from(this.supabase
       .from('Team')
       .delete()
       .eq('idPokemon', idPokemon)
       .eq('idUser', idUser)
+      .then(response => response.data as unknown as []));
   }
 }
