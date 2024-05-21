@@ -66,28 +66,57 @@ export class WatchPokemonsComponent implements OnInit {
       });
   }
 
-  search(event: any) {
+  onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      this.pokemonsListAux = [];
-      this.pokeApiService
-        .getPokemonByName(event.target.value)
-        .subscribe((pokemon: any) => {
-          pokemon.color1 = this.commonUtilsService.getColor(pokemon.types[0].type.name);
-          if (pokemon.types[1]) {
-            pokemon.color2 = this.commonUtilsService.getColor(pokemon.types[1].type.name);
-            pokemon.bg_color =
-              'linear-gradient(135deg,' +
-              pokemon.color1 +
-              ' 0%,' +
-              pokemon.color2 +
-              ' 100%)';
-          } else {
-            pokemon.bg_color = pokemon.color1;
-          }
-          this.pokemon = pokemon;
-          this.pokemonsListAux.push(this.pokemon);
-        });
+      event.preventDefault();
+      const inputElement = event.target as HTMLInputElement;
+      this.search(inputElement.value);
     }
+  }
+
+  reload(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.value === '') {
+      window.location.reload();
+      window.location.href = '/watchPokemons';
+    }
+  }
+
+
+  search(pokemonName: string) {
+    console.log(pokemonName);
+
+    const pokemons = this.pokemonsListAux;
+    this.pokemonsListAux = [];
+
+    
+
+
+    this.pokeApiService
+      .getPokemonByName(pokemonName)
+      .subscribe((pokemon: any) => {
+
+        this.pokemon = pokemon;
+        console.log(this.pokemon);
+        pokemon.color1 = this.commonUtilsService.getColor(pokemon.types[0].type.name);
+        if (pokemon.types[1]) {
+          pokemon.color2 = this.commonUtilsService.getColor(pokemon.types[1].type.name);
+          pokemon.bg_color =
+            'linear-gradient(135deg,' +
+            pokemon.color1 +
+            ' 0%,' +
+            pokemon.color2 +
+            ' 100%)';
+        } else {
+          pokemon.bg_color = pokemon.color1;
+        }
+        this.user = this.commonUtilsService.getUsuario();
+        console.log(this.user);
+        this.pokemon = pokemon;
+        this.pokemonsListAux.push(this.pokemon);
+        this.pokemonsListAux.sort((a: any, b: any) => a.id - b.id);
+      });
+
   }
 
   checkLenTeam() {

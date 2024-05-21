@@ -20,8 +20,7 @@ export class PokeApiService {
   }
 
   getPokemonByName(name: string){
-    let url = new URL(this.baseUrl);
-    url.searchParams.set('name', name);
+    let url = new URL(this.baseUrl + name);
     return this.http.get<any>(url.toString());
   }
 
