@@ -29,6 +29,7 @@ export class WatchPokemonsComponent implements OnInit {
   constructor(private pokeApiService: PokeApiService) { }
 
   ngOnInit() {
+    this.user = this.commonUtilsService.getUsuario();
     this.email = this.user?.email;
     if (this.email) {
       this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
@@ -74,12 +75,17 @@ export class WatchPokemonsComponent implements OnInit {
     }
   }
 
+  loadUser() {
+    this.user = this.commonUtilsService.getUsuario();
+  }
+
   reload(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value === '') {
-      window.location.reload();
+      window.location.href = '/home';
       window.location.href = '/watchPokemons';
     }
+    
   }
 
 
