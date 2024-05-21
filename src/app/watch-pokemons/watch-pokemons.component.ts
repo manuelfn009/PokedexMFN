@@ -93,7 +93,7 @@ export class WatchPokemonsComponent implements OnInit {
 
 
     this.pokeApiService
-      .getPokemonByName(pokemonName)
+      .getPokemonByName(pokemonName.toLowerCase())
       .subscribe((pokemon: any) => {
 
         this.pokemon = pokemon;
