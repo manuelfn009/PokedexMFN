@@ -1,4 +1,16 @@
+@if(errTeam){
+  <div class="flex items-center p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <span class="sr-only">Info</span>
+    <div>
+      <span class="font-medium">Warning alert!</span> You can't add new pokemons to the team, your team is full.
+    </div>
+  </div>
+}
 <div class="flex justify-center mt-3 items-center content-center w-full">
+  
   <div class="flex justify-center mt-3 items-center content-center w-full">
     @if (!shiny) {
     <button class="btn btn-primary" (click)="shinyNS()">
@@ -70,7 +82,7 @@
       </div>
       }
       <div class="mt-1 flex w-full justify-center">
-        <button value="{{ p.id }}" (click)="addToTeam(p.id, p.name, p.types[0].type.name)"
+        <button value="{{ p.id }}" (click)="addToTeam(p.id, p.name, p.types[0].type.name); checkLenTeam()"
           class="relative inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium rounded-lg group focus:ring-4 focus:outline-none"
           [class]="user ? 'bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white text-gray-900 dark:text-white focus:ring-pink-200 dark:focus:ring-pink-800' : 'bg-gray-400 text-gray-700 cursor-not-allowed'"
           [disabled]="!user">

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';0
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { BbddService } from '../service/bbdd.service';
 import { CommonUtilsService } from '../service/common-utils.service';
 

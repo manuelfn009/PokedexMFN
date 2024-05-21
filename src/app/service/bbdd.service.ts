@@ -59,4 +59,12 @@ export class BbddService {
       .eq('idUser', idUser)
       .then(response => response.data as []));
   }
+
+  deletePokemonFromTeam(idPokemon: number, idUser: number) {
+    this.supabase
+      .from('Team')
+      .delete()
+      .eq('idPokemon', idPokemon)
+      .eq('idUser', idUser)
+  }
 }

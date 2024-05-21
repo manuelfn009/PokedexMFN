@@ -17,24 +17,26 @@ export class WatchPokemonsComponent implements OnInit {
   offset: number = 0;
   limit: number = 15;
   shiny: boolean = false;
-  
+  team: any = [];
+  errTeam: boolean = false;
+
   private commonUtilsService = inject(CommonUtilsService);
   private bbddService = inject(BbddService);
   user?: any = this.commonUtilsService.getUsuario();
   email?: string;
   idUser = signal(0);
 
-  constructor(private pokeApiService: PokeApiService) {}
+  constructor(private pokeApiService: PokeApiService) { }
 
   ngOnInit() {
     this.email = this.user?.email;
-    if(this.email){
-    this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
-      console.log(data);
-      this.idUser.set(data[0].idUser);
-    })
-  }
-    console.log("Usuario desde WP", this.user?.email);
+    if (this.email) {
+      this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
+        console.log(data);
+        this.idUser.set(data[0].idUser);
+      });
+    }
+
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
@@ -63,32 +65,42 @@ export class WatchPokemonsComponent implements OnInit {
         }
       });
   }
-  
+
   search(event: any) {
     if (event.key === 'Enter') {
-    this.pokemonsListAux = [];
-    this.pokeApiService
-      .getPokemonByName(event.target.value)
-      .subscribe((pokemon: any) => {
-        pokemon.color1 = this.commonUtilsService.getColor(pokemon.types[0].type.name);
-        if (pokemon.types[1]) {
-          pokemon.color2 = this.commonUtilsService.getColor(pokemon.types[1].type.name);
-          pokemon.bg_color =
-            'linear-gradient(135deg,' +
-            pokemon.color1 +
-            ' 0%,' +
-            pokemon.color2 +
-            ' 100%)';
-        } else {
-          pokemon.bg_color = pokemon.color1;
-        }
-        this.pokemon = pokemon;
-        this.pokemonsListAux.push(this.pokemon);
-      });
+      this.pokemonsListAux = [];
+      this.pokeApiService
+        .getPokemonByName(event.target.value)
+        .subscribe((pokemon: any) => {
+          pokemon.color1 = this.commonUtilsService.getColor(pokemon.types[0].type.name);
+          if (pokemon.types[1]) {
+            pokemon.color2 = this.commonUtilsService.getColor(pokemon.types[1].type.name);
+            pokemon.bg_color =
+              'linear-gradient(135deg,' +
+              pokemon.color1 +
+              ' 0%,' +
+              pokemon.color2 +
+              ' 100%)';
+          } else {
+            pokemon.bg_color = pokemon.color1;
+          }
+          this.pokemon = pokemon;
+          this.pokemonsListAux.push(this.pokemon);
+        });
+    }
   }
-}
 
- 
+  checkLenTeam() {
+    this.team = this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
+      this.team = team;
+      console.log(this.team);
+      if (this.team.length == 5) {
+        this.errTeam = true;
+      } else {
+        this.errTeam = false;
+      }
+    })
+  }
 
   next() {
     this.offset += 15;
@@ -156,16 +168,14 @@ export class WatchPokemonsComponent implements OnInit {
     if (this.shiny) this.shiny = false;
     else this.shiny = true;
   }
-  
+
   addToTeam(idPokemon: number, pokemonType: string, pokemonName: string) {
     this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
-      if(team.length < 5) {
-        console.log("Me caben mas" + team.length)
+      if (team.length < 5) {
         this.bbddService.addTeam(idPokemon, pokemonType, pokemonName, this.idUser());
-      }else{
-        console.log("No me caben mas")
+      } else {
       }
     })
   }
-  
+
 }

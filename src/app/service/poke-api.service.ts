@@ -43,8 +43,9 @@ export class PokeApiService {
   }
 
   getPokemonsById(id: number){
-    let url = new URL(this.baseUrl + id);    
-    return this.http.get<any>(url.toString());
+    let url = new URL(this.baseUrl + id);
+    console.log(url.toString());
+    return this.getPokemonByUrl(url.toString());
   }
   
 }
