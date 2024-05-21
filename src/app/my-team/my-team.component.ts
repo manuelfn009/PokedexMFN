@@ -91,7 +91,22 @@ export class MyTeamComponent {
       })
     }}
 
-
+deleteAll(){
+  this.email = this.user?.email;
+  if (this.email) {
+    this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
+      console.log(data);
+      this.idUser = data[0].idUser;
+      console.log("idUser",this.idUser);
+      this.bbddService.deleteAllPokemonsFromTeam(this.idUser).subscribe((data: any) => {
+        console.log(data);
+        this.pokemons = [];
+        this.listId = [];
+        this.ngOnInit();
+      });
+    })
+  }
+}
 
 
   }

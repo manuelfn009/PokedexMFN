@@ -19,6 +19,7 @@ export class WatchPokemonsComponent implements OnInit {
   shiny: boolean = false;
   team: any = [];
   errTeam: boolean = false;
+  addPokemon: boolean = false;
 
   private commonUtilsService = inject(CommonUtilsService);
   private bbddService = inject(BbddService);
@@ -129,10 +130,12 @@ export class WatchPokemonsComponent implements OnInit {
     this.team = this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
       this.team = team;
       console.log(this.team);
-      if (this.team.length == 5) {
+      if (this.team.length == 6) {
+        this.addPokemon = false;
         this.errTeam = true;
       } else {
         this.errTeam = false;
+        this.addPokemon = true;
       }
     })
   }
@@ -206,7 +209,7 @@ export class WatchPokemonsComponent implements OnInit {
 
   addToTeam(idPokemon: number, pokemonType: string, pokemonName: string) {
     this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
-      if (team.length < 5) {
+      if (team.length < 6) {
         this.bbddService.addTeam(idPokemon, pokemonType, pokemonName, this.idUser());
       } else {
       }
