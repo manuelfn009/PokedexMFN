@@ -24,10 +24,12 @@
             @if (t.name != "stellar" && t.name != "unknown") {
             <tr
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row"
-                    class=" flex flex-wrap items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:bg-gray-700 dark:text-gray-400">
-                    <img src="../../assets/img/{{t.name}}.png" class="w-10 h-10">{{t.name}}
-                </th>
+                <td 
+                    class=" px-6 py-4 bg-gray-700 ">
+                    <div class="flex flex-wrap gap-2 text-white justify-center items-center">
+                    <img src="../../assets/img/{{t.name}}.png" class="w-10 h-10">
+                    <strong>{{t.name}}</strong></div>
+                </td>
                 <td class="px-6 py-4">
                     <div class="flex flex-wrap gap-2">
                         @for (d of t.damage_relations.double_damage_from; track $index) {
