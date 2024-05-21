@@ -8,6 +8,7 @@ export class PokeApiService {
   private baseUrl = "https://pokeapi.co/api/v2/pokemon/";
   private typeUrl = "https://pokeapi.co/api/v2/type/";
 
+
   constructor(private http: HttpClient) { }
 
   getAllCharacters(offset: number, limit: number){
@@ -38,6 +39,11 @@ export class PokeApiService {
   }
 
   getTypeByUrl(url: string){
+    return this.http.get<any>(url.toString());
+  }
+
+  getPokemonsById(id: number){
+    let url = new URL(this.baseUrl + id);    
     return this.http.get<any>(url.toString());
   }
   

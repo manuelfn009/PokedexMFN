@@ -44,7 +44,7 @@ export class BbddService {
     this.supabase.auth.signOut();
   }
 
-  addTeam(idPokemon: number, pokemonType: string, pokemonName: string, idUser: number) {
+  addTeam(idPokemon: number, pokemonName: string, pokemonType: string, idUser: number) {
     this.supabase
       .from('Team')
       .insert([{ idPokemon: idPokemon, pokemonType: pokemonType, pokemonName: pokemonName, idUser: idUser}])

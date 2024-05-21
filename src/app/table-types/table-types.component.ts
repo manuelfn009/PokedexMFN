@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, inject } from '@angular/core';
 import { PokeApiService } from '../service/poke-api.service';
-import { WatchPokemonsComponent } from '../watch-pokemons/watch-pokemons.component';
 
 @Component({
   selector: 'app-table-types',
