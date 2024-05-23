@@ -76,4 +76,12 @@ export class BbddService {
       .eq('idUser', idUser)
       .then(response => response.data as unknown as []));
   }
+
+  existEmail(email: string): Observable<[]> {
+    return from(this.supabase
+      .from('User')
+      .select('*')
+      .eq('email', email)
+      .then(response => response.data as []));
+  }
 }

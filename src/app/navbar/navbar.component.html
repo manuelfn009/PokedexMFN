@@ -90,7 +90,7 @@
                     <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                         email</label>
-                      <input type="email" name="email" id="email"
+                      <input type="email" name="email" id="email" (input)="existeEmail($event)"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         placeholder="name@company.com" [formControl]="emailControl" required />
                     </div>
@@ -102,6 +102,11 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         required />
                     </div>
+                    @if(!existEmail){
+                    <div>
+                      <p class="text-red-500 text-xs italic">Email not found</p>
+                    </div>
+                    }
                     <button type="button" (click)="getUserByEmail($event)" onclick="my_modal_3.close()"
                       class="btn relative w-full inline-flex items-center justify-center p-0.5 mb-3 bottom-0 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
                       <span
@@ -145,14 +150,14 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                               <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Roberto" [formControl]="nameControl" required />
+                                placeholder="Nombre" [formControl]="nameControl" required />
                             </div>
                             <div>
                               <label for="surname"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
                               <input type="text" name="surname" id="surname"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                placeholder="Fernandez Nevado" [formControl]="surnameControl" required />
+                                placeholder="Apellido1 Apellido2" [formControl]="surnameControl" required />
                             </div>
                             <div>
                               <label for="email"

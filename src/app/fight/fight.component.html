@@ -1,0 +1,19 @@
+<div style="background-image: url(../../assets/img/arena.png);" class="w-dvw h-dvh bg-cover bg-center flex flex-col justify-center items-center">
+    <!-- @for(p of aleatoryTeam; track $index) {
+        <p>{{p.name}}</p>
+} -->
+    <div class="flex items-center justify-center w-full">
+        
+        <div class="flex flex-col gap-2">
+            <img src="../../assets/img/MysterioTrainer.png" width="230" height="230" [style]="{filter: 'drop-shadow(2px -2px 1px black)'}"/>
+            <p class="text-white p-3 bg-gray-700 rounded text-center bg-opacity-40 text-lg">PokedexMFN IA</p>
+        </div>
+        <img src="../../assets/img/vs.gif" class="" />
+        <div class="flex flex-col gap-2">
+            <img src="../../assets/img/ashTrainer.png" width="150" height="150" [style]="{filter: 'drop-shadow(2px -2px 1px black)'}" />
+            <p class="text-white p-3 bg-gray-700 rounded text-center bg-opacity-40 text-lg">{{user.name}}</p>
+        </div>
+        
+    </div>
+    <button class="btn bg-orange-500 hover:bg-orange-700 text-white">Start Fight</button>
+</div>

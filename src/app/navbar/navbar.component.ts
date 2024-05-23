@@ -43,6 +43,7 @@ export class NavbarComponent {
   user?: any;
   usuario: any;
   err: string[] = [];
+  existEmail: boolean = false; 
 
   supabase = inject(BbddService);
 
@@ -141,6 +142,26 @@ export class NavbarComponent {
       },
     });
     
+  }
+
+  existeEmail(event: Event) {
+    
+    this.email = event.target as HTMLInputElement;
+    this.email = this.email.value;
+
+    console.log(this.email);
+    
+    this.bbddService.existEmail(this.email).subscribe({
+      next: (data: any) => {
+        if (data) {
+          console.log(data);
+          this.existEmail = true;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   limpiarLista(){

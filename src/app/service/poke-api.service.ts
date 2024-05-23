@@ -46,5 +46,4 @@ export class PokeApiService {
     console.log(url.toString());
     return this.getPokemonByUrl(url.toString());
   }
-  
 }

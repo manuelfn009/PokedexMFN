@@ -3,6 +3,7 @@ import { IndexComponent } from './index/index.component';
 import { WatchPokemonsComponent } from './watch-pokemons/watch-pokemons.component';
 import { TableTypesComponent } from './table-types/table-types.component';
 import { MyTeamComponent } from './my-team/my-team.component';
+import { FightComponent } from './fight/fight.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +25,9 @@ export const routes: Routes = [
     {
         path: 'myTeam',
         component: MyTeamComponent
+    },
+    {
+        path: 'fight',
+        component: FightComponent
     }
 ];
