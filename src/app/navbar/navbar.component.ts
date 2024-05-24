@@ -5,7 +5,6 @@ import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { BbddService } from '../service/bbdd.service';
 import { CommonUtilsService } from '../service/common-utils.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
