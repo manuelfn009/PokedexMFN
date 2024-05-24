@@ -4,6 +4,7 @@ import { AuthService } from '../service/auth.service';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { BbddService } from '../service/bbdd.service';
 import { CommonUtilsService } from '../service/common-utils.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-navbar',
@@ -173,4 +174,22 @@ export class NavbarComponent {
       window.location.href = '/';
     })    
   }
+swal() {
+  Swal.fire({
+    title: 'Verify your account',
+    background: '#111827',
+    text: "You must verify your account in your email!",
+    color:'white', 
+    icon: 'warning'
+  });
+}
+
+validateErr() {
+  let my_modal = document.getElementById('my_modal') as HTMLDialogElement;
+  if(this.err.length == 0){
+    this.swal();
+    my_modal.close();
+  }
+}
+  
 }
