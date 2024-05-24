@@ -4,7 +4,7 @@ import { AuthService } from '../service/auth.service';
 import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 import { BbddService } from '../service/bbdd.service';
 import { CommonUtilsService } from '../service/common-utils.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
