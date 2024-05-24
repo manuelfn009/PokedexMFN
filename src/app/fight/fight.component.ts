@@ -134,11 +134,5 @@ export class FightComponent {
           console.log('Draw');
         }
       });
-      if(this.contIA > this.contUser){
-        this.teamWinner = 'PokedexMFN IA wins!!';
-      } else if(this.contIA < this.contUser){
-        this.teamWinner = this.user?.name + ' wins!!';
-      } else if(this.contIA === this.contUser){
-        this.teamWinner = "It's a draw!!";
-  }}
+  }
 }

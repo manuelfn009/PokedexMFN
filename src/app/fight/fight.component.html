@@ -1,19 +1,35 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Jersey+15&family=Ubuntu&display=swap');
+
+    .jersey-15-regular {
+        font-family: "Jersey 15", sans-serif;
+        font-style: normal;
+    }
+
+    h1 {
+        font-size: xx-large;
+    }
+</style>
 <div style="background-image: url(../../assets/img/arena.png)"
     class="w-full h-dvh bg-cover bg-center flex flex-col justify-center items-center">
     @if(index === 4){
     <div class="absolute  bg-blue-950  bg-cover bg-center flex flex-col justify-center items-center p-8 gap-4">
         <h1>{{teamWinner}}</h1>
-        <div class="flex items-center justify-center w-full">
-            @if(teamWinner === 'PokedexMFN IA wins!!'){
+        <div class="flex flex-col items-center justify-center w-full">
+            @if(contIA > 3){
+                <h2>PokedexMFN IA wins!!</h2>
             <img src="../../assets/img/MysterioTrainer.png" width="230" alt="">
-            }@else if (teamWinner === user.name + ' wins!!') {
+            }@else if (contUser > 3) {
+                <h2>{{user.name}} wins!!</h2>
             <img src="../../assets/img/ashTrainer.png" width="150" alt="">
-            }@else {
+            }@else if (contIA === 3 || contUser === 3) {
+                <h2>It's a draw!!</h2>
+                <div class="flex gap-2 justify-center items-center">
             <img src="../../assets/img/ashTrainer.png" alt="" width="150">
-            <img src="../../assets/img/MysterioTrainer.png" alt="" width="230">
+            <img src="../../assets/img/MysterioTrainer.png" alt="" width="230"></div>
             }
         </div>
-        <h1>Final Score: <br>{{user.name}} {{contUser}} - {{contIA}} PokedexMFN IA</h1>
+        <h2>Final Score: <br>{{user.name}} {{contUser}} - {{contIA}} PokedexMFN IA</h2>
         <div>
             <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/myTeam'">Restart game</a>
             <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/home'">Back home</a>
@@ -23,16 +39,24 @@
 
 
     @if(figthing){
-    <div class="scoreboard flex items-center justify-center bg-black bg-opacity-50">
-        <h2 class="text-white p-3  rounded text-center  text-xl">
-            PokedexMFN IA {{contIA}}
-        </h2>
-        -
-
-
-        <h2 class="text-white p-3  rounded text-center  text-xl">
-            {{contUser}} {{user.name}}
-        </h2>
+    <div class="jersey-15-regular flex items-center justify-center bg-black p-3">
+        <div class="flex flex-col gap-2 justify-center items-center">
+            <h1 class="text-blue-500 text-3xl-center">
+                IA
+            </h1>
+            <h1 class="text-blue-500 text-3xl-center">
+                {{contIA}}
+            </h1>
+        </div>
+        <h1 class="text-white p-2">-</h1>
+        <div class="flex flex-col gap-2 justify-center items-center">
+            <h1 class="text-red-500 text-3xl-center">
+                {{user.name}}
+            </h1>
+            <h1 class="text-red-500 text-3xl-center">
+                {{contUser}}
+            </h1>
+        </div>
     </div>
     <div class="flex items-center justify-center w-full">
         <div *ngFor="let p of aleatoryTeam; let i = index">
