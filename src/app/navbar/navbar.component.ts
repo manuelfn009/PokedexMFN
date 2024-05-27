@@ -32,7 +32,10 @@ export class NavbarComponent {
       Validators.maxLength(15),
     ],
   })
-  emailControl = new FormControl('', Validators.required);
+  emailControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+  });
   nameControl = new FormControl('', Validators.required);
   surnameControl = new FormControl('', Validators.required);
 
@@ -145,7 +148,7 @@ export class NavbarComponent {
   }
 
   existeEmail(event: Event) {
-    
+    this.existEmail = false;
     this.email = event.target as HTMLInputElement;
     this.email = this.email.value;
 
@@ -153,7 +156,7 @@ export class NavbarComponent {
     
     this.bbddService.existEmail(this.email).subscribe({
       next: (data: any) => {
-        if (data) {
+        if (data.length > 0) {
           console.log(data);
           this.existEmail = true;
         }
