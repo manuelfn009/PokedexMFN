@@ -84,4 +84,21 @@ export class BbddService {
       .eq('email', email)
       .then(response => response.data as []));
   }
+
+  updateUser(id: number, name: string, surname: string, password: string): Observable<[]> {
+    return from(this.supabase
+      .from('User')
+      .update({ name: name, surname: surname, password: password })
+      .eq('idUser', id)
+      .select()
+      .then(response => response.data as []));
+  } 
+
+  deleteUser(id: number): Observable<[]> {
+    return from(this.supabase
+      .from('User')
+      .delete()
+      .eq('idUser', id)
+      .then(response => response.data as unknown as []));
+  }
 }

@@ -45,19 +45,22 @@ export class NavbarComponent {
   surname: any;
   user?: any;
   usuario: any;
+  errPassC: boolean = false;
+  errPass: boolean = false;
   err: string[] = [];
-  existEmail: boolean = false; 
+  existEmail: boolean = false;
 
   supabase = inject(BbddService);
 
   ngOnInit() {
-    console.log("El usuario es",this.authService.getUser());
+    console.log("El usuario es", this.authService.getUser());
     this.authService.getUser().then((user: any) => {
-      console.log("El usuario es",user);
-      if(user){
+      console.log("El usuario es", user);
+      if (user) {
         this.supabase.getUsuarioOnlyByEmail(user.data?.identities[0].email).subscribe((data: any) => {
           this.commonUtilsService.setUsuario(data[0]);
           this.usuario = data[0];
+          console.log(this.usuario);
         });
       };
     });
@@ -66,15 +69,16 @@ export class NavbarComponent {
   correctValidation: boolean = false;
 
   private authService = inject(AuthService);
-  login($event: Event) {}
+  login($event: Event) { }
 
   signup($event: Event) {
-    $event.preventDefault();    
+    $event.preventDefault();
     this.limpiarLista();
 
-    if (!this.passwordControl.valid){
+    if (!this.passwordControl.valid) {
       this.limpiarLista();
-      this.err.push("Password must have between 6 and 15 characters");
+      this.errPassC = true;
+      this.err.push("Password must be between 6 and 15 characters");
     }
 
     if (
@@ -90,36 +94,36 @@ export class NavbarComponent {
       if (this.password !== this.confirmPasswordControl.value) {
         this.err.push("Passwords don't match");
         return;
-      }else{
+      } else {
         this.bbddService
-        .signUp(this.name, this.surname, this.email, this.password)
-        .subscribe({
-          next: (data: any) => {
-            if (data) {
-              this.authService
-                .signUp(data[0].email, data[0].password)
-                .then((data: any) => {
-                  console.log(data);
-                });
-              console.log(data);
-            }
-          },
-          error: (error) => {
-            console.log(error);
-            this.err.push("Email already registered");
-          },
-        });
+          .signUp(this.name, this.surname, this.email, this.password)
+          .subscribe({
+            next: (data: any) => {
+              if (data) {
+                this.authService
+                  .signUp(data[0].email, data[0].password)
+                  .then((data: any) => {
+                    console.log(data);
+                  });
+                console.log(data);
+              }
+            },
+            error: (error) => {
+              console.log(error);
+              this.err.push("Email already registered");
+            },
+          });
       }
-      
+
     } else {
       console.log('error de validacion');
-      this.err.push("All fields are required");      
+      this.err.push("All fields are required");
     }
   }
 
   getUserByEmail($event: Event) {
     //$event.preventDefault();
-    
+
     this.limpiarLista();
     this.email = this.emailControl.value;
     this.password = this.passwordControl.value;
@@ -144,7 +148,7 @@ export class NavbarComponent {
         this.err.push("Incorrect email or password");
       },
     });
-    
+
   }
 
   existeEmail(event: Event) {
@@ -153,7 +157,7 @@ export class NavbarComponent {
     this.email = this.email.value;
 
     console.log(this.email);
-    
+
     this.bbddService.existEmail(this.email).subscribe({
       next: (data: any) => {
         if (data.length > 0) {
@@ -167,31 +171,102 @@ export class NavbarComponent {
     });
   }
 
-  limpiarLista(){
+  limpiarLista() {
     this.err = [];
+  }
+
+  dropdownVisible = false;
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
   }
 
   logout() {
     this.authService.logout().then(() => {
       window.location.href = '/';
-    })    
+    })
   }
-swal() {
-  Swal.fire({
-    title: 'Verify your account',
-    background: '#111827',
-    text: "You must verify your account in your email!",
-    color:'white', 
-    icon: 'warning'
-  });
-}
+  swal() {
+    Swal.fire({
+      title: 'Verify your account',
+      background: '#111827',
+      text: "You must verify your account in your email!",
+      color: 'white',
+      icon: 'warning'
+    });
+  }
 
-validateErr() {
-  let my_modal = document.getElementById('my_modal') as HTMLDialogElement;
-  if(this.err.length == 0){
-    this.swal();
-    my_modal.close();
+  swalDelete() {
+    Swal.fire({
+      title: 'Are you sure?',
+      background: '#111827',
+      text: "You won't be able to revert this!",
+      color: 'white',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(this.usuario.idUser);
+        this.bbddService.deleteAllPokemonsFromTeam(this.usuario.idUser).subscribe((data: any) => {
+          this.deleteUser(this.usuario.idUser);
+          this.logout();
+        })
+
+      }
+    })
   }
-}
-  
+
+  validateErr() {
+    let my_modal = document.getElementById('my_modal') as HTMLDialogElement;
+    if (this.err.length == 0) {
+      this.swal();
+      my_modal.close();
+
+    }
+
+  }
+
+  validatePass() {
+    if (this.confirmPasswordControl.value != this.passwordControl.value) {
+      this.errPassC = true;
+    } else {
+      this.errPassC = false;
+    }
+  }
+  validatePass2() {
+    if (this.passwordControl.invalid) {
+      this.errPass = true;
+    } else {
+      this.errPass = false;
+    }
+  }
+
+  deleteUser(id: number) {
+    console.log(id);
+    this.bbddService.deleteUser(id).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  updateUser() {
+    this.name = this.nameControl.value;
+    this.surname = this.surnameControl.value;
+    this.password = this.passwordControl.value;
+    this.bbddService.updateUser(this.usuario.idUser, this.name, this.surname, this.password).subscribe({
+      next: (data: any) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }
