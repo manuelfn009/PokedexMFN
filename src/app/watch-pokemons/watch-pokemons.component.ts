@@ -83,7 +83,7 @@ export class WatchPokemonsComponent implements OnInit {
   reload(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value === '') {
-      window.location.href = '/home';
+      //window.location.href = '/home';
       window.location.href = '/watchPokemons';
     }
     
