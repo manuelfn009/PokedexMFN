@@ -10,55 +10,53 @@
         font-size: xx-large;
     }
 </style>
-<div style="background-image: url(../../assets/img/arena.png)"
-    class="w-full h-dvh bg-cover bg-center flex flex-col justify-center items-center">
+<div style="background-image: url(../../assets/img/arena.png)" class="w-full h-dvh bg-cover bg-center">
     @if(index === 4){
-    <div class="absolute  bg-blue-950  bg-cover bg-center flex flex-col justify-center items-center p-8 gap-4">
-        <h1>{{teamWinner}}</h1>
-        <div class="flex flex-col items-center justify-center w-full">
-            @if(contIA > 3){
-                <h2>PokedexMFN IA wins!!</h2>
-            <img src="../../assets/img/MysterioTrainer.png" width="230" alt="">
-            }@else if (contUser > 3) {
-                <h2>{{user.name}} wins!!</h2>
-            <img src="../../assets/img/ashTrainer.png" width="150" alt="">
-            }@else if (contIA === 3 || contUser === 3) {
-                <h2>It's a draw!!</h2>
+    <div class="w-full h-5/6 flex items-center justify-center">
+        <div
+            class="absolute  bg-gray-300 dark:bg-blue-950 shadow-md rounded-sm bg-cover bg-center flex flex-col justify-center items-center p-8 gap-4">
+            <div class="flex flex-col items-center justify-center w-full">
+                @if(contIA > 3){
+                <h1 class="text-black  dark:text-white">PokedexMFN IA wins!!</h1>
+                <img src="../../assets/img/MysterioTrainer.png" width="230" alt="">
+                }@else if (contUser > 3) {
+                <h1 class="text-black  dark:text-white">{{user.name}} wins!!</h1>
+                <img src="../../assets/img/ashTrainer.png" width="150" alt="">
+                }@else if (contIA === 3 || contUser === 3) {
+                <h1 class="text-black  dark:text-white"> It's a draw!!</h1>
                 <div class="flex gap-2 justify-center items-center">
-            <img src="../../assets/img/ashTrainer.png" alt="" width="150">
-            <img src="../../assets/img/MysterioTrainer.png" alt="" width="230"></div>
-            }
-        </div>
-        <h2>Final Score: <br>{{user.name}} {{contUser}} - {{contIA}} PokedexMFN IA</h2>
-        <div>
-            <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/myTeam'">Restart game</a>
-            <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/home'">Back home</a>
+                    <img src="../../assets/img/ashTrainer.png" alt="" width="150">
+                    <img src="../../assets/img/MysterioTrainer.png" alt="" width="230">
+                </div>
+                }
+            </div>
+            <h2 class="text-black  dark:text-white">Final Score: <br>{{user.name}} {{contUser}} - {{contIA}} PokedexMFN
+                IA
+            </h2>
+            <div>
+                <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/myTeam'">Restart game</a>
+                <a class="btn bg-orange-500 hover:bg-orange-700 text-white" [routerLink]="'/home'">Back home</a>
+            </div>
         </div>
     </div>
     }@else{
 
 
     @if(figthing){
-    <div class="jersey-15-regular flex items-center justify-center bg-black p-3">
+    <div class="jersey-15-regular flex items-center justify-center bg-black p-3 mb-10">
         <div class="flex flex-col gap-2 justify-center items-center">
             <h1 class="text-blue-500 text-3xl-center">
-                IA
-            </h1>
-            <h1 class="text-blue-500 text-3xl-center">
-                {{contIA}}
+                PokedexMFN IA {{contIA}}
             </h1>
         </div>
         <h1 class="text-white p-2">-</h1>
         <div class="flex flex-col gap-2 justify-center items-center">
             <h1 class="text-red-500 text-3xl-center">
-                {{user.name}}
-            </h1>
-            <h1 class="text-red-500 text-3xl-center">
-                {{contUser}}
+                {{contUser}} {{user.name}}
             </h1>
         </div>
     </div>
-    <div class="flex items-center justify-center w-full">
+    <div class="flex items-center justify-center w-full h-4/6">
         <div *ngFor="let p of aleatoryTeam; let i = index">
             <div *ngIf="i === currentIndex">
                 <p class="text-white p-3 bg-gray-700 rounded text-center bg-opacity-40 text-lg">
@@ -72,7 +70,10 @@
                 </div>
             </div>
         </div>
-        <img src="../../assets/img/vs.gif" class="" />
+        <button (click)="currentIndex = (currentIndex + 1) % 6; incrementIndex()"
+            class="text-white p-3 mx-5 bg-red-700 hover:bg-red-900 border-2 border-white rounded text-center text-lg">
+            Attack
+        </button>
         <div *ngFor="let p of pokemons; let i = index">
             <div *ngIf="i === currentIndex">
                 <p class="text-white p-3 bg-gray-700 rounded text-center bg-opacity-40 text-lg">
@@ -88,12 +89,9 @@
         </div>
 
     </div>
-    <button (click)="currentIndex = (currentIndex + 1) % 6; incrementIndex()"
-        class="text-white p-3 bg-gray-700 rounded text-center bg-opacity-40 text-lg">
-        Next
-    </button>
+
     }@else {
-    <div class="flex items-center justify-center w-full">
+    <div class="flex items-center justify-center w-full h-5/6">
         <div class="flex flex-col gap-2">
             <img src="../../assets/img/MysterioTrainer.png" width="230" height="230"
                 [style]="{ filter: 'drop-shadow(2px -2px 1px black)' }" />
@@ -110,9 +108,11 @@
             </p>
         </div>
     </div>
-    <button class="btn bg-orange-500 hover:bg-orange-700 text-white" (click)="fight(); getAleatoryTeam()">
-        Start Fight
-    </button>
+    <div class="flex items-center justify-center w-full">
+        <button class="btn bg-orange-500 hover:bg-orange-700 text-white " (click)="fight(); getAleatoryTeam()">
+            Start Fight
+        </button>
+    </div>
     }
 
     }

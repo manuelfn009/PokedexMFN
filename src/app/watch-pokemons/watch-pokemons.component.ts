@@ -216,4 +216,27 @@ export class WatchPokemonsComponent implements OnInit {
     })
   }
 
+
+  changeClass(pokemonId : number) {
+    let cardFlip = document.getElementById(pokemonId.toString()) as HTMLDivElement;
+    let cardFront = document.getElementById("front-" + pokemonId.toString() ) as HTMLDivElement;
+    let global = document.getElementById("global-" + pokemonId.toString()) as HTMLDivElement;
+    cardFlip.classList.toggle("card-flip");
+    cardFront.classList.toggle("cardflip");
+    global.style.background = "rgb(28, 28, 53)";
+    global.style.transition = "all 1s";
+    global.style.transform = "rotateY(180deg)";
+  }
+
+  goBack(pokemonId : number, bg_color: string) {
+    let cardFlip = document.getElementById(pokemonId.toString()) as HTMLDivElement;
+    let cardFront = document.getElementById("front-" + pokemonId.toString() ) as HTMLDivElement;
+    let global = document.getElementById("global-" + pokemonId.toString()) as HTMLDivElement;
+    cardFlip.classList.remove("card-flip");
+    cardFront.classList.remove("cardflip");
+    global.style.background = bg_color;
+    global.style.transform = "rotateY(0deg)";
+    global.addEventListener('mouseover', () => global.style.scale = "105%")
+    global.addEventListener('mouseout', () => global.style.scale = "100%")
+  }
 }
