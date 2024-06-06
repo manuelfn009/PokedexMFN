@@ -16,14 +16,14 @@ import { CommonUtilsService } from './service/common-utils.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  // Inject services & set variables
   title = 'pokedexMFN';
-
-
   supabase = inject(BbddService);
   authService = inject(AuthService);
   commonUtilsService = inject(CommonUtilsService);
   usuario = this.commonUtilsService.getUsuario();
 
+  // Check if user is logged in
   ngOnInit() {
     console.log("El usuario es",this.authService.getUser());
     this.authService.getUser().then((user: any) => {

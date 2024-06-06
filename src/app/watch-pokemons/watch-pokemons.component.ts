@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./watch-pokemons.component.css'],
 })
 export class WatchPokemonsComponent implements OnInit {
+  // Variables to store Pokémon data and user information
   pokemons: any = [];
   pokemon: any;
   pokemonsListAux: any = [];
@@ -21,6 +22,7 @@ export class WatchPokemonsComponent implements OnInit {
   errTeam: boolean = false;
   addPokemon: boolean = false;
 
+  // Injecting services and initializing user-related variables
   private commonUtilsService = inject(CommonUtilsService);
   private bbddService = inject(BbddService);
   user?: any = this.commonUtilsService.getUsuario();
@@ -30,24 +32,29 @@ export class WatchPokemonsComponent implements OnInit {
   constructor(private pokeApiService: PokeApiService) { }
 
   ngOnInit() {
+    // Fetch initial Pokémon data and load user information
     this.user = this.commonUtilsService.getUsuario();
     this.email = this.user?.email;
     if (this.email) {
+      // Fetch user details by email
       this.bbddService.getUsuarioOnlyByEmail(this.email).subscribe((data: any) => {
         console.log(data);
         this.idUser.set(data[0].idUser);
       });
     }
 
+    // Fetch initial set of Pokémon characters
     this.pokeApiService
       .getAllCharacters(this.offset, this.limit)
       .subscribe((pokemons: any) => {
         this.pokemons = pokemons.results;
 
+        // Fetch detailed information for each Pokémon
         for (let i = 0; i < pokemons.results.length; i++) {
           this.pokeApiService
             .getPokemonByUrl(this.pokemons[i].url)
             .subscribe((pokemon: any) => {
+              // Assign colors based on Pokémon types
               pokemon.color1 = this.commonUtilsService.getColor(pokemon.types[0].type.name);
               if (pokemon.types[1]) {
                 pokemon.color2 = this.commonUtilsService.getColor(pokemon.types[1].type.name);
@@ -68,6 +75,7 @@ export class WatchPokemonsComponent implements OnInit {
       });
   }
 
+  // Handle Enter key press for search functionality
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -76,28 +84,25 @@ export class WatchPokemonsComponent implements OnInit {
     }
   }
 
+  // Load user information
   loadUser() {
     this.user = this.commonUtilsService.getUsuario();
   }
 
+  // Reload the page based on input
   reload(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.value === '') {
-      //window.location.href = '/home';
       window.location.href = '/watchPokemons';
     }
-    
   }
 
-
+  // Search for a specific Pokémon by name
   search(pokemonName: string) {
     console.log(pokemonName);
 
     const pokemons = this.pokemonsListAux;
     this.pokemonsListAux = [];
-
-    
-
 
     this.pokeApiService
       .getPokemonByName(pokemonName.toLowerCase())
@@ -126,6 +131,7 @@ export class WatchPokemonsComponent implements OnInit {
 
   }
 
+  // Check the length of the team
   checkLenTeam() {
     this.team = this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
       this.team = team;
@@ -139,7 +145,7 @@ export class WatchPokemonsComponent implements OnInit {
       }
     })
   }
-
+ // Next button
   next() {
     this.offset += 15;
     this.pokemonsListAux = [];
@@ -171,6 +177,7 @@ export class WatchPokemonsComponent implements OnInit {
         }
       });
   }
+  // Prev button
   prev() {
     this.offset -= 15;
     this.pokeApiService
@@ -201,12 +208,12 @@ export class WatchPokemonsComponent implements OnInit {
         }
       });
   }
-
+ // Shiny mode toggle
   shinyNS() {
     if (this.shiny) this.shiny = false;
     else this.shiny = true;
   }
-
+  // Add pokemon to team
   addToTeam(idPokemon: number, pokemonType: string, pokemonName: string) {
     this.bbddService.getTeam(this.idUser()).subscribe((team: any) => {
       if (team.length < 6) {
@@ -216,7 +223,7 @@ export class WatchPokemonsComponent implements OnInit {
     })
   }
 
-
+  // Change class for flip animation
   changeClass(pokemonId : number) {
     let cardFlip = document.getElementById(pokemonId.toString()) as HTMLDivElement;
     let cardFront = document.getElementById("front-" + pokemonId.toString() ) as HTMLDivElement;
@@ -227,7 +234,7 @@ export class WatchPokemonsComponent implements OnInit {
     global.style.transition = "all 1s";
     global.style.transform = "rotateY(180deg)";
   }
-
+  // Go back to normal with flip animation too
   goBack(pokemonId : number, bg_color: string) {
     let cardFlip = document.getElementById(pokemonId.toString()) as HTMLDivElement;
     let cardFront = document.getElementById("front-" + pokemonId.toString() ) as HTMLDivElement;

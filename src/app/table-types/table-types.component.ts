@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokeApiService } from '../service/poke-api.service';
 
 @Component({
@@ -6,34 +6,35 @@ import { PokeApiService } from '../service/poke-api.service';
   standalone: true,
   imports: [],
   templateUrl: './table-types.component.html',
-  styleUrl: './table-types.component.css'
+  styleUrls: ['./table-types.component.css']
 })
-export class TableTypesComponent implements OnInit{
-
+export class TableTypesComponent implements OnInit {
+  // Variables to store Pokémon types and their damage relations
   types: any = [];
-  type: any
+  type: any;
   damages: any = [];
-  url: any
+  url: any;
 
+  // Inject the PokeApiService
   constructor(private pokeApiService: PokeApiService) { }
 
+  // Lifecycle hook to initialize the component
   ngOnInit() {
-    this.pokeApiService
-      .getAllTypes()
-      .subscribe((types: any) => {
-        this.types = types.results;
+    // Fetch all Pokémon types
+    this.pokeApiService.getAllTypes().subscribe((types: any) => {
+      // Store the types
+      this.types = types.results;
 
-        for (let i = 0; i < this.types.length; i++) {
-          this.pokeApiService
-            .getTypeByUrl(this.types[i].url)
-            .subscribe((type: any) => {
-              this.types[i] = type;
-                          })
-        }
-        
+      // Iterate over each type to fetch detailed information
+      for (let i = 0; i < this.types.length; i++) {
+        this.pokeApiService.getTypeByUrl(this.types[i].url).subscribe((type: any) => {
+          // Replace the type with detailed information
+          this.types[i] = type;
+        });
+      }
+
+      // Log the types for debugging purposes
       console.log("Tipos", this.types);
-      });
+    });
   }
-
 }
-
