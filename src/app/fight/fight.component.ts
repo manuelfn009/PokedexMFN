@@ -130,10 +130,10 @@ export class FightComponent {
         this.contIA++;
       } else if (this.pokemons[currentIndex].stats[1].base_stat > this.aleatoryTeam[currentIndex].stats[1].base_stat) {
         console.log(this.aleatoryTeam[currentIndex].name,' wins');
-        this.contIA++;
+        this.contUser++;
       } else if (this.pokemons[currentIndex].stats[1].base_stat < this.aleatoryTeam[currentIndex].stats[1].base_stat) {
         console.log(this.pokemons[currentIndex].name,' wins');
-        this.contUser++;
+        this.contIA++;
       } else{
         this.contUser++;
         this.contIA++;
